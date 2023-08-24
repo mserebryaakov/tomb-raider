@@ -1,0 +1,47 @@
+# Exclude the .git folder as it contains Git repository information.
+.git
+
+# Exclude VS Code development settings.
+.vscode
+
+# Exclude Windows executables (.exe).
+*.exe
+
+# Exclude temporary Windows executable files (.exe~).
+*.exe~
+
+# Exclude Windows libraries (.dll).
+*.dll
+
+# Exclude Linux shared objects (.so).
+*.so
+
+# Exclude macOS dynamic libraries (.dylib).
+*.dylib
+
+# Exclude Go test binary files.
+*.test
+
+# Exclude Go output binary files.
+*.out
+
+# Exclude log files.
+*.log
+
+# Exclude the Dockerfile as it's not needed for the build context.
+Dockerfile
+
+# Exclude the README.md file as it's usually not needed inside the image.
+README.md
+
+# Exclude docker-compose configuration file as it's not needed for the build context.
+docker-compose.yaml
+
+# Exclude the .gitignore file as it's not needed inside the image.
+.gitignore
+
+# Exclude environment variable file as it might contain sensitive information.
+.env
+
+# Exclude makefile
+Makefile

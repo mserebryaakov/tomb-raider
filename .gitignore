@@ -1,0 +1,32 @@
+# Exclude VS Code development settings.
+.vscode
+
+# Exclude Windows executables.
+*.exe
+
+# Exclude temporary Windows executable files.
+*.exe~
+
+# Exclude Windows libraries.
+*.dll
+
+# Exclude Linux shared objects.
+*.so
+
+# Exclude macOS dynamic libraries.
+*.dylib
+
+# Exclude Go test binary files.
+*.test
+
+# Exclude Go output binary files.
+*.out
+
+# Exclude log files.
+*.log
+
+# Exclude Go module's workspace file.
+go.work
+
+# Exclude environment variable file as it might contain sensitive information.
+.env
