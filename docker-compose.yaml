@@ -1,0 +1,30 @@
+version: '3'
+services:
+  tomb-rider:
+    container_name: tomb-raider
+    build: .
+    env_file:
+      - .env
+    networks:
+      - tomb_network
+
+  postgres:
+    container_name: postgres-tomb-raider
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: POSTGRES_USER
+      POSTGRES_PASSWORD: POSTGRES_PASS
+      POSTGRES_DB: POSTGRES_DB
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - tomb_network
+
+networks:
+  tomb_network:
+
+volumes:
+  pgdata:
