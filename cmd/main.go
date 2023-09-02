@@ -41,7 +41,7 @@ func main() {
 	// Создание requestID под каждый запрос
 	router.Use(middleware.RequestID)
 	// Логирование запроса
-	router.Use(httplogger.NewMiddleware(log))
+	router.Use(httplogger.NewMiddleware(ctx))
 	// Восстановление после паники
 	router.Use(middleware.Recoverer)
 	// URLformat для удобного роутинга
@@ -61,7 +61,7 @@ func main() {
 
 	// Gracefull shutdown
 	stop := make(chan os.Signal, 1)
-	signal.Notify(stop, os.Interrupt, syscall.SIGTERM)
+	signal.Notify(stop, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 
 	<-stop
 

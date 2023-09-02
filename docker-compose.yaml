@@ -17,7 +17,8 @@ services:
       POSTGRES_PASSWORD: POSTGRES_PASS
       POSTGRES_DB: POSTGRES_DB
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - tombpgdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
@@ -27,4 +28,4 @@ networks:
   tomb_network:
 
 volumes:
-  pgdata:
+  tombpgdata:

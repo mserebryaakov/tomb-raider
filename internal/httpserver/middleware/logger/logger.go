@@ -1,15 +1,18 @@
 package logger
 
 import (
+	"context"
 	"net/http"
 	"time"
 
 	"log/slog"
 
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/mserebryaakov/tomb-raider/pkg/logger"
 )
 
-func NewMiddleware(log *slog.Logger) func(next http.Handler) http.Handler {
+func NewMiddleware(ctx context.Context) func(next http.Handler) http.Handler {
+	log := logger.FromContext(ctx)
 	return func(next http.Handler) http.Handler {
 		log = log.With(
 			slog.String("component", "middleware/logger"),
