@@ -12,7 +12,9 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/mserebryaakov/tomb-raider/config"
+	"github.com/mserebryaakov/tomb-raider/internal/httpserver/handlers"
 	httplogger "github.com/mserebryaakov/tomb-raider/internal/httpserver/middleware/logger"
+	"github.com/mserebryaakov/tomb-raider/internal/httpserver/services"
 	"github.com/mserebryaakov/tomb-raider/internal/storage/postgre"
 	"github.com/mserebryaakov/tomb-raider/pkg/logger"
 )
@@ -35,7 +37,8 @@ func main() {
 		os.Exit(1)
 	}
 
-	_ = storage
+	// Создание словия service
+	service := services.New(storage)
 
 	router := chi.NewRouter()
 	// Создание requestID под каждый запрос
@@ -46,6 +49,10 @@ func main() {
 	router.Use(middleware.Recoverer)
 	// URLformat для удобного роутинга
 	router.Use(middleware.URLFormat)
+
+	// Создание слоя handlers
+	handler := handlers.New(service)
+	handler.Register(router)
 
 	server := &http.Server{
 		Addr:    env.Port,
