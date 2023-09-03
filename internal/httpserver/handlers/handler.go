@@ -17,6 +17,6 @@ func New(service services.IService) *handler {
 
 func (h *handler) Register(r chi.Router) {
 	r.Route("/namespace", func(r chi.Router) {
-		r.Post("/", h.CreateNamespace())
+		r.Post("/", h.CreateNamespace)
 	})
 }

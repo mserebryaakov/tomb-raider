@@ -1,23 +1,17 @@
-package logger
+package metrics
 
 import (
-	"context"
 	"net/http"
 	"time"
 
 	"log/slog"
 
 	"github.com/go-chi/chi/v5/middleware"
-	"github.com/mserebryaakov/tomb-raider/pkg/logger"
 )
 
-func NewMiddleware(ctx context.Context) func(next http.Handler) http.Handler {
-	log := logger.FromContext(ctx)
+// Middleware метрик
+func WithMetrics(log *slog.Logger) func(next http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
-		log = log.With(
-			slog.String("component", "middleware/logger"),
-		)
-
 		fn := func(w http.ResponseWriter, r *http.Request) {
 			entry := log.With(
 				slog.String("method", r.Method),
