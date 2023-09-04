@@ -14,7 +14,7 @@ func (s *storage) CreateApplication(app model.Application) (string, error) {
 
 func (s *storage) ReadApplication(id string) (model.Application, error) {
 	var app model.Application
-	app.ID = id
+	app.ID = model.UUID(id)
 	err := s.pool.QueryRow(context.Background(), "SELECT name, namespace_id, code, data FROM application WHERE id = $1", id).Scan(&app.Name, &app.NamespaceID, &app.Code, &app.Data)
 	return app, err
 }
